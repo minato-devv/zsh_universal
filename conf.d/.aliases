@@ -6,11 +6,6 @@ alias which='which -a'
 alias path='print -l $path'
 alias fpath='print -l $fpath'
 
-copypath() { 
-	realpath "$1" | tr -d '\n' | pbcopy 
-	echo "Copied location of $1 to clipboard"
-}
-
 mkcd() {
 	mkdir -p "$1" && cd "$1"
 }
