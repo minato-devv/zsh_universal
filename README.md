@@ -6,7 +6,7 @@ Attempt to create an opinionated, modular, & universal zshrc configuration for a
 
 ```sh
 git clone https://github.com/minato-devv/zsh_universal.git && cd zsh_universal
-mkdir -p ~/.config/zsh
+mkdir -p ~/.config/zsh ~/.cache ~/.local/state
 ln -s "$PWD/.zshenv" "$HOME/" && source "$HOME/.zshenv"
 find "$PWD" -mindepth 1 -maxdepth 1 ! -name ".zshenv" -exec ln -s {} "$ZDOTDIR/" \;
 ```
