@@ -36,10 +36,10 @@ zstyle ':completion:*' group-name ''
 zstyle ':completion:*:descriptions' format '%B%U%d%u%b'
 zstyle ':completion:*' list-dirs-first true
 
-bindkey -e
+for i in $ZDOTDIR/conf.d/*(.N); do source $i; done
+
 autoload -Uz edit-command-line && zle -N edit-command-line
 bindkey '^X^E' edit-command-line
 
-for i in $ZDOTDIR/conf.d/*(.N); do source $i; done
 for i in $ZDOTDIR/plugins/*(.N); do source $i; done
 for i in $ZDOTDIR/functions/*(.N); do autoload -Uz $i; done
