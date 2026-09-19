@@ -1,0 +1,68 @@
+alias ls='ls -Al'
+alias s='du -sh .* * | sort -h'
+
+alias grep='grep -hIE'
+alias which='which -a'
+alias path='print -l $path'
+alias fpath='print -l $fpath'
+
+copypath() { 
+	realpath "$1" | tr -d '\n' | pbcopy 
+	echo "Copied location of $1 to clipboard"
+}
+
+mkcd() {
+	mkdir -p "$1" && cd "$1"
+}
+
+z() {
+    local file
+    case "$1" in
+		r) exec zsh -il ;;
+        i) file="$ZDOTDIR/.zshrc" ;;
+        v) file="$HOME/.zshenv" ;;
+        p) file="$ZDOTDIR/.zprofile" ;;
+        a) file="$ZDOTDIR/conf.d/.aliases" ;;
+		b) file="$ZDOTDIR/conf.d/.bindkey" ;;
+		f) file="$ZDOTDIR/conf.d/.vcs_info" ;;
+		t) file="$ZDOTDIR/conf.d/.transient_prompt" ;;
+        *) return 1 ;;
+    esac
+
+	case "$2" in
+		s) source "$file" && echo "Sourced $file" ;;
+		e|"") "${EDITOR:-vim}" "$file" && echo "Edited $file" ;;
+		c) cat "$file" ;;
+		*) echo "Unknown action: $2" ;;
+	esac
+}
+alias giturl="git config --get remote.origin.url | sed -E 's/^(https:\/\/github.com\/|git@github.com:)([^/:]+\/[^.]+)(\.git)?$/https:\/\/github.com\/\2\.git/'"
+alias gitrem='open $(giturl)'
+
+alias gd='git diff HEAD'
+alias gdsr='gd --stat @{u}..HEAD'
+alias gdr='gd @{u}..HEAD'
+alias gds='git diff --stat'
+alias gdst='git diff --staged'
+alias gdu='gd -U0'
+
+alias glr='git log @{u}..HEAD'
+alias glx='git log --oneline -G'
+
+alias gst='git status'
+alias gss='git status --short'
+alias gsvv='git status -vv'
+
+alias gp='git push'
+alias gpuom='git push -u origin main'
+
+alias gc='git commit --verbose'
+alias gcam='git commit --all --message'
+alias gcaf='git commit --all -F - <<EOF'
+
+alias gcl='git clone'
+alias glo='git log --oneline --decorate'
+alias gpr='git pull --rebase'
+alias grs='git restore --staged'
+alias gs='git show'
+alias gaa='git add --all'
